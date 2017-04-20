@@ -20,7 +20,7 @@ cov2cor(T2)
 
 
 ##plot the effect sizes and their confidence ellipses
-plot(result,diag.panel = FALSE)
+plot(result, axis.labels = c("Retention","Transfer"))
 
 ##Plot the effect sizes with the forest plots
 ##create extra panels for the forest plots
