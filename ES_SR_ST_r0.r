@@ -11,6 +11,13 @@ SRSTd <- read_csv("SRd_STd_r0.csv")
 result<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model")
 summary(result)
 
+##extract the variance component of the random effects
+T2<-vec2symMat(coef(result,select="random"))
+T2
+##Convert the covariance matrix to a correlation matrix
+cov2cor(T2)
+
+
 ##plot the effect sizes and their confidence ellipses
 plot(result,diag.panel = FALSE)
 
