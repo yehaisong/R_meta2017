@@ -4,8 +4,9 @@ library(metaSEM)
 library(metafor)
 
 ##Read data from csv
-SRSTd <- read_csv("SRd_STd_r0.csv")
+SRSTd <- read_csv("SRd_STd_r1.csv")
 
+##r=0
 ##Multivariance meta analysis with metaSEM
 ##SRd-short term retention effect size, STd-short tem transfer effect size, v-variance,cov-covariance
 result<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model")
@@ -33,7 +34,11 @@ title("Forest plot of retention")
 forest(rma(yi=STd,vi=STv,data=SRSTd))
 title("Forest plot of transfer")
 
-##three moderators
-result1<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model",x=cbind(PP,LVS,ToV))
+##r=1
+result1<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov1,STv),data=SRSTd, model.name="Random effects model")
 summary(result1)
-plot(result1)
+
+##three moderators
+resultall<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model",x=cbind(PP,LVS,ToV))
+summary(resultall)
+plot(resultall)
