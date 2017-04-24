@@ -7,6 +7,7 @@ library(MVN)
 ##Read data from csv
 SRSTd <- read_csv("SRd_STd_r0.csv")
 
+<<<<<<< HEAD
 ##QQPlot test using metaFor
 resSR<-rma(measure="SMD",SRd,SRv,data=SRSTd)
 qqnorm(resSR,label="out", main="Normal Q-Q Plot of Retention")
@@ -25,13 +26,24 @@ qqnorm(resCL)
 nmtres<-mardiaTest(SRSTd[,c(9:10)],qqplot=TRUE)
 uniPlot(SRSTd[9:10],type="qqplot")
 
+=======
+##r=0
+>>>>>>> origin/master
 ##Multivariance meta analysis with metaSEM
 ##SRd-short term retention effect size, STd-short tem transfer effect size, v-variance,cov-covariance
 result<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model")
 summary(result)
 
+##extract the variance component of the random effects
+T2<-vec2symMat(coef(result,select="random"))
+T2
+##Convert the covariance matrix to a correlation matrix
+cov2cor(T2)
+
+
 ##plot the effect sizes and their confidence ellipses
-plot(result,diag.panel = FALSE)
+plot(result,diag.panel=FALSE)
+plot(result, axis.labels = c("Retention","Transfer"))
 
 ##Plot the effect sizes with the forest plots
 ##create extra panels for the forest plots
@@ -46,6 +58,19 @@ forest(rma(yi=STd,vi=STv,data=SRSTd))
 title("Forest plot of transfer")
 
 ##three moderators
-result1<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model",x=cbind(PP,LVS,ToV))
+resultall<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model",x=cbind(PP,LVS,ToV))
+
+##r=1
+result1<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov1,STv),data=SRSTd, model.name="Random effects model")
 summary(result1)
-plot(result1)
+
+##three moderators
+resultpp<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model",x=cbind(PP))
+summary(resultpp)
+resultlvs<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model",x=cbind(LVS))
+summary(resultlvs)
+resulttov<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model",x=cbind(ToV))
+summary(resulttov)
+resultall<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model",x=cbind(PP,LVS,ToV))
+summary(resultall)
+plot(resultall)
