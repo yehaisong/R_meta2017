@@ -22,6 +22,7 @@ resCL<-rma(measure="SMD",CLd,CLv,data=SRSTd)
 qqnorm(resCL)
 
 ##Normality test using Maridia's MVN
+nmtres<-mardiaTest(SRSTd[,c(9:10)],qqplot=TRUE)
 uniPlot(SRSTd[9:10],type="qqplot")
 
 ##Multivariance meta analysis with metaSEM
