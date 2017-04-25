@@ -30,6 +30,7 @@ qqnorm(resCL)
 
 ##Normality test using Maridia's MVN
 nmtres<-mardiaTest(SRSTd[,c(9:10)],qqplot=TRUE)
+nmtres
 unires<-uniPlot(SRSTd[9:10],type="qqplot")
 
 ##r=0
