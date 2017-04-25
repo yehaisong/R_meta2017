@@ -64,9 +64,9 @@ plot(result, axis.labels = c("Retention","Transfer"))
 
 ##Plot the effect sizes with the forest plots
 ##create extra panels for the forest plots
-plot(result,diag.panel = TRUE, 
-     main="Learning Performance Analysis", 
-     axis.labels = c("Retention","Transfer"))
+##plot(result,diag.panel = TRUE, 
+#     main="Learning Performance Analysis", 
+#     axis.labels = c("Retention","Transfer"))
 ##forest plot for retention
 forest(rma(yi=SRd,vi=SRv,data=SRSTd))
 title("Forest plot of retention")
