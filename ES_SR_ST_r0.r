@@ -6,7 +6,7 @@ library(MVN)
 library(nortest)
 
 ##Read data from csv
-SRSTd <- read_csv("SRd_STd_r0.csv")
+SRSTd <- read_csv("SRd_STd_CLd_r0.csv")
 
 ##QQPlot test using metaFor
 resSR<-rma(measure="SMD",SRd,SRv,data=SRSTd)
