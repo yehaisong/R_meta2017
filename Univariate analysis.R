@@ -36,6 +36,7 @@ resSR_PP
 #Approach 2: meta regression
 resSR_PP_reg<-rma(measure="SMD",SRd,SRv,mods=~PP,data=SRSTd,digits = 3)
 resSR_PP_reg
+plot(resSR_PP_reg)
 
 #Length of VS
 #Appraoch 1: Q statistics
@@ -43,12 +44,14 @@ resSR_PP_reg
 #Approach 2: meta regression
 resSR_LVS_reg<-rma(measure="SMD",SRd,SRv,mods=~LVS,data=SRSTd, digits=3)
 resSR_LVS_reg
+plot(resSR_LVS_reg)
 
 #Type of visualization
 #Approach 1: Q statistics
 #Approach 2: meta regression
 resSR_ToV_reg<-rma(measure="SMD",SRd,SRv,mods=~ToV,data=SRSTd, digits=3)
 resSR_ToV_reg
+plot(resSR_ToV_reg)
 
 #two moderators
 resSR_PP_LVS_reg<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,LVS),data=SRSTd, digits=3)
@@ -79,6 +82,7 @@ resST
 #Approach 2: meta regression
 resST_PP_reg<-rma(measure="SMD",STd,STv,mods=~PP,data=SRSTd,digits = 3)
 resST_PP_reg
+plot(resST_PP_reg)
 
 #Length of VS
 #Appraoch 1: Q statistics
@@ -86,12 +90,14 @@ resST_PP_reg
 #Approach 2: meta regression
 resST_LVS_reg<-rma(measure="SMD",STd,STv,mods=~LVS,data=SRSTd, digits=3)
 resST_LVS_reg
+plot(resST_LVS_reg)
 
 #Type of visualization
 #Approach 1: Q statistics
 #Approach 2: meta regression
 resST_ToV_reg<-rma(measure="SMD",STd,STv,mods=~ToV,data=SRSTd, digits=3)
 resST_ToV_reg
+plot(resST_ToV_reg)
 
 #two moderators
 resST_PP_LVS_reg<-rma(measure="SMD",STd,STv,mods=cbind(PP,LVS),data=SRSTd, digits=3)
