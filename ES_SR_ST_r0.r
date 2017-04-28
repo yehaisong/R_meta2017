@@ -76,14 +76,14 @@ title("Forest plot of transfer")
 
 
 ##r=1
-result1<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov1,STv),data=SRSTd, model.name="Random effects model")
-summary(result1)
+#result1<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov1,STv),data=SRSTd, model.name="Random effects model")
+#summary(result1)
 
 ##extract the variance component of the random effects
-T21<-vec2symMat(coef(result1,select="random"))
-T21
+#T21<-vec2symMat(coef(result1,select="random"))
+#T21
 ##Convert the covariance matrix to a correlation matrix
-cov2cor(T21)
+#cov2cor(T21)
 
 ##three moderators
 resultpp<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model",x=cbind(PP))
