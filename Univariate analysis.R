@@ -6,7 +6,7 @@ library(MVN)
 library(nortest)
 
 ##Read data from csv
-SRSTd <- read_csv("SRd_STd_CLd_r0.csv")
+SRSTd <- read_csv("yeh_ad.csv")
 
 ###Retention
 #overall analysis

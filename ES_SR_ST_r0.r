@@ -6,7 +6,7 @@ library(MVN)
 library(nortest)
 
 ##Read data from csv
-SRSTd <- read_csv("yeh_wd.csv")
+SRSTd <- read_csv("yeh_ad.csv")
 
 ##QQPlot test using metaFor
 #Normality test for short term retention
