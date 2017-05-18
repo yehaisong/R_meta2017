@@ -7,7 +7,12 @@ library(nortest)
 
 ##Read data from csv
 SRSTd <- read_csv("yeh_ad.csv")
-
+SRSTd.TotalN<-SRSTd$CGn+SRSTd$EGn
+mean(SRSTd.TotalN)
+sd(SRSTd.TotalN)
+max(SRSTd.TotalN)
+min(SRSTd.TotalN)
+sum(SRSTd.TotalN)
 ###Retention
 #overall analysis
 resSR<-rma(measure="SMD",SRd,SRv,data=SRSTd)
