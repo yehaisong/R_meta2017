@@ -106,5 +106,8 @@ T2all
 cov2cor(T2all)
 plot(resultall)
 
-
+#CL
+resultCL<-meta(y=cbind(CLd),v=cbind(CLv),data=SRSTd, model.name="Random effects model")
+summary(resultCL)
+plot(resultCL,study.ellipse.plot = FALSE)
 
