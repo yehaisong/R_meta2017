@@ -7,17 +7,43 @@ library(nortest)
 
 ##Read data from csv
 SRSTd <- read_csv("yeh_ad_final_05162017.csv")
+
 SRSTd.TotalN<-SRSTd$CGn+SRSTd$EGn
-mean(SRSTd.TotalN)
-sd(SRSTd.TotalN)
-max(SRSTd.TotalN)
-min(SRSTd.TotalN)
-sum(SRSTd.TotalN)
+cat("N mean: ", mean(SRSTd.TotalN))
+cat("N SD: ",sd(SRSTd.TotalN))
+cat("N MAX: ", max(SRSTd.TotalN))
+cat("N MIN: ", min(SRSTd.TotalN))
+cat("N Total: ", sum(SRSTd.TotalN))
+
+
+
 ###Retention
 #overall analysis
 resSR<-rma(measure="SMD",SRd,SRv,data=SRSTd)
 resSR
-
+##forest plot for retention
+rmaSR<-rma(yi=SRd,vi=SRv,data=SRSTd)
+forest(rmaSR,slab=SRSTd$ExperimentID)
+title("Forest plot for LPKR")
+forest(SRSTd$SRd, SRSTd$SRv,
+       xlim=c(-2.5,3.5),
+       subset=order(SRSTd$SRd),
+       slab=NA, annotate=FALSE,
+       efac=0,
+       pch=19,
+       col="gray40",
+       psize=2,
+       cex.lab=1,cex.axis = 1,
+       lty=c("solid","blank"))
+title("Caterpillar plot for LPKR")
+points(sort(SRSTd$SRd), 68:1, pch=19, cex=0.5)
+addpoly(rmaSR, row=0, mlab = "", annotate = FALSE, cex=1)
+text(-2,0,"RE Model", pos=4, offset=0, cex=1)
+#funnel and trimfill adjustment
+par(mar=c(5,4,1,2))
+rmaSR.taf<-trimfill(rmaSR)
+funnel(rmaSR.taf)
+rmaSR.taf
 #Subgroup analysis
 # Presentation Pace
 #Approach 1: Q statistics
@@ -61,22 +87,20 @@ plot(resSR.ToV)
 #two moderators
 resSR.PPxLVS<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,LVS,PoPxLoVS),data=SRSTd, digits=3)
 resSR.PPxLVS
-v<-vcov.rma(resSR.PPxLVS)
-cov2cor(v)
+cov2cor(vcov.rma(resSR.PPxLVS))
 
 resSR.PPxToV<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,ToV,PoPxToV),data=SRSTd, digits=3)
 resSR.PPxToV
+cov2cor(vcov.rma(resSR.PPxToV))
 
 resSR.ToVxLVS<-rma(measure="SMD",SRd,SRv,mods=cbind(LVS,ToV, LoVSxToV),data=SRSTd, digits=3)
 resSR.ToVxLVS
+cov2cor(vcov.rma(resSR.ToVxLVS))
 
 #All moderators
 resSR.PPxLVSxToV<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,LVS,ToV,PoPxLoVS,PoPxToV,LoVSxToV,PoPxLoVSxToV),data=SRSTd, digits=3)
 resSR.PPxLVSxToV
-
-
-
-
+cov2cor(vcov.rma(resSR.PPxLVSxToV))
 
 
 ###Transfer
@@ -84,89 +108,99 @@ resSR.PPxLVSxToV
 resST<-rma(measure="SMD",STd,STv,data=SRSTd)
 resST
 
+##forest plot for transfer
+rmaST<-rma(yi=STd,vi=STv,data=SRSTd)
+forest(rmaST,slab=SRSTd$ExperimentID)
+title("Forest plot for LPKT")
+forest(SRSTd$STd, SRSTd$STv,
+       xlim=c(-2.5,3.5),
+       subset=order(SRSTd$STd),
+       slab=NA, annotate=FALSE,
+       efac=0,
+       pch=19,
+       col="gray40",
+       psize=2,
+       cex.lab=1,cex.axis = 1,
+       lty=c("solid","blank"))
+title("Caterpillar plot for LPKT")
+points(sort(SRSTd$STd), 58:1, pch=19, cex=0.5)
+addpoly(rmaST, row=0, mlab = "", annotate = FALSE, cex=1)
+text(-2,0,"RE Model", pos=4, offset=0, cex=1)
+#funnel and trimfill adjustment
+par(mar=c(5,4,1,2))
+rmaST.taf<-trimfill(rmaST)
+funnel(rmaST.taf)
+rmaST.taf
+
 #Subgroup analysis
 # Presentation Pace
 #Approach 1: Q statistics
 #Seperate analysis for Presentation Pace (PP)
 #Create data frame for the two subgroup estimates
 #Approach 2: meta regression
-resST_PP_reg<-rma(measure="SMD",STd,STv,mods=~PP,data=SRSTd,digits = 3)
-resST_PP_reg
-plot(resST_PP_reg)
+resST.PP<-rma(measure="SMD",STd,STv,mods=~PP,data=SRSTd,digits = 3)
+resST.PP
+plot(resST.PP)
 
 #Length of VS
 #Appraoch 1: Q statistics
 #Seperate analysis for Length of Verbal Segment (LVS)
 #Approach 2: meta regression
-resST_LVS_reg<-rma(measure="SMD",STd,STv,mods=~LVS,data=SRSTd, digits=3)
-resST_LVS_reg
-plot(resST_LVS_reg)
+resST.LVS<-rma(measure="SMD",STd,STv,mods=~LVS,data=SRSTd, digits=3)
+resST.LVS
+plot(resST.LVS)
 
 #Type of visualization
 #Approach 1: Q statistics
 #Approach 2: meta regression
-resST_ToV_reg<-rma(measure="SMD",STd,STv,mods=~ToV,data=SRSTd, digits=3)
-resST_ToV_reg
-plot(resST_ToV_reg)
+resST.ToV<-rma(measure="SMD",STd,STv,mods=~ToV,data=SRSTd, digits=3)
+resST.ToV
+plot(resST.ToV)
 
 #two moderators
-resST_PP_LVS_reg<-rma(measure="SMD",STd,STv,mods=cbind(PP,LVS),data=SRSTd, digits=3)
-resST_PP_LVS_reg
+resST.PPxLVS<-rma(measure="SMD",STd,STv,mods=cbind(PP,LVS,PoPxLoVS),data=SRSTd, digits=3)
+resST.PPxLVS
+cov2cor(vcov.rma(resST.PPxLVS))
 
-resST_PP_ToV_reg<-rma(measure="SMD",STd,STv,mods=cbind(PP,ToV),data=SRSTd, digits=3)
-resST_PP_ToV_reg
+resST.PPxToV<-rma(measure="SMD",STd,STv,mods=cbind(PP,ToV,PoPxToV),data=SRSTd, digits=3)
+resST.PPxToV
+cov2cor(vcov.rma(resST.PPxToV))
 
-resST_ToV_LVS_reg<-rma(measure="SMD",STd,STv,mods=cbind(LVS,ToV),data=SRSTd, digits=3)
-resST_ToV_LVS_reg
+resST.ToVxLVS<-rma(measure="SMD",STd,STv,mods=cbind(LVS,ToV, LoVSxToV),data=SRSTd, digits=3)
+resST.ToVxLVS
+cov2cor(vcov.rma(resST.ToVxLVS))
 
 #All moderators
-resST_All_reg<-rma(measure="SMD",STd,STv,mods=cbind(PP,LVS,ToV),data=SRSTd, digits=3)
-resST_All_reg
+resST.PPxLVSxToV<-rma(measure="SMD",STd,STv,mods=cbind(PP,LVS,ToV,PoPxLoVS,PoPxToV,LoVSxToV,PoPxLoVSxToV),data=SRSTd, digits=3)
+resST.PPxLVSxToV
+cov2cor(vcov.rma(resST.PPxLVSxToV))
+
 
 #CL
 #overall analysis
 resCL<-rma(measure="SMD",CLd,CLv,data=SRSTd)
 resCL
 
-#Subgroup analysis
-# Presentation Pace
-#Approach 1: Q statistics
-#Seperate analysis for Presentation Pace (PP)
-#Create data frame for the two subgroup estimates
-#Approach 2: meta regression
-resCL_PP_reg<-rma(measure="SMD",CLd,CLv,mods=~PP,data=SRSTd,digits = 3)
-resCL_PP_reg
-plot(resCL_PP_reg)
+##forest plot for CL
+rmaCL<-rma(yi=CLd,vi=CLv,data=SRSTd)
+forest(rmaCL,slab=SRSTd$ExperimentID)
+title("Forest plot for LCL")
+forest(SRSTd$CLd, SRSTd$CLv,
+       xlim=c(-2.5,3.5),
+       subset=order(SRSTd$CLd),
+       slab=NA, annotate=FALSE,
+       efac=0,
+       pch=19,
+       col="gray40",
+       psize=2,
+       cex.lab=1,cex.axis = 1,
+       lty=c("solid","blank"))
+title("Caterpillar plot for LCL")
+points(sort(SRSTd$CLd), 23:1, pch=19, cex=0.5)
+addpoly(rmaCL, row=0, mlab = "", annotate = FALSE, cex=1)
+text(-2,0,"RE Model", pos=4, offset=0, cex=1)
+par(mar=c(5,4,1,2))
+rmaCL.taf<-trimfill(rmaCL)
+funnel(rmaCL.taf)
+rmaCL.taf
 
-#Length of VS
-#Appraoch 1: Q statistics
-#Seperate analysis for Length of Verbal Segment (LVS)
-#Approach 2: meta regression
-resCL_LVS_reg<-rma(measure="SMD",CLd,CLv,mods=~LVS,data=SRSTd, digits=3)
-resCL_LVS_reg
-plot(resCL_LVS_reg)
-
-#Type of visualization
-#Approach 1: Q statistics
-#Approach 2: meta regression
-resCL_ToV_reg<-rma(measure="SMD",CLd,CLv,mods=~ToV,data=SRSTd, digits=3)
-resCL_ToV_reg
-plot(resCL_ToV_reg)
-
-#two moderators
-resCL_PP_LVS_reg<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,LVS),data=SRSTd, digits=3)
-resCL_PP_LVS_reg
-
-resCL_PP_ToV_reg<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,ToV),data=SRSTd, digits=3)
-resCL_PP_ToV_reg
-
-resCL_ToV_LVS_reg<-rma(measure="SMD",CLd,CLv,mods=cbind(LVS,ToV),data=SRSTd, digits=3)
-resCL_ToV_LVS_reg
-
-#All moderators
-resCL_All_reg<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,LVS,ToV),data=SRSTd, digits=3)
-resCL_All_reg
-
-#Interaction PP and LoVS
-resCL_PP_LVS_i_reg<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,LVS,PoPxLoVS),data=SRSTd, digits=3)
-resCL_PP_LVS_i_reg

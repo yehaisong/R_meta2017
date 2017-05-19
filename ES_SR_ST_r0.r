@@ -53,44 +53,38 @@ nmtres
 ##r=0
 ##Multivariance meta analysis with metaSEM
 ##SRd-short term retention effect size, STd-short tem transfer effect size, v-variance,cov-covariance
-result<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random Effects Model Analysis for Retention and Transfer")
-summary(result)
+result.SRST0.main<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random Effects Model Analysis for Retention and Transfer")
+summary(result.SRST0.main)
 
 ##extract the variance component of the random effects
-T2<-vec2symMat(coef(result,select="random"))
-T2
+result.SRST0.T2<-vec2symMat(coef(result.SRST0.main,select="random"))
+##T2
 ##Convert the covariance matrix to a correlation matrix
-cov2cor(T2)
-
+result.SRST0.cor<-cov2cor(result.SRST0.T2)
+result.SRST0.cor
 
 ##plot the effect sizes and their confidence ellipses
-plot(result, axis.labels = c("Retention","Transfer"),study.ellipse.plot = FALSE)
+plot(result.SRST0.main, axis.labels = c("Retention","Transfer"),study.ellipse.plot = FALSE)
 
 ##Plot the effect sizes with the forest plots
 ##create extra panels for the forest plots
-plot(result,diag.panel = TRUE, 
-     main="Learning Performance Analysis", 
-     axis.labels = c("Retention","Transfer"))
-##forest plot for retention
-forest(rma(yi=SRd,vi=SRv,data=SRSTd),slab=SRSTd$ExperimentID)
-title("Forest plot of retention")
-##forest plot for transfer
-forest(rma(yi=STd,vi=STv,data=SRSTd),slab=SRSTd$ExperimentID)
-title("Forest plot of transfer")
-##forest plot for CL
-forest(rma(yi=CLd,vi=CLv,data=SRSTd),slab=SRSTd$ExperimentID)
-title("Forest plot of cognitive load")
+#plot(result.SRST0.main,diag.panel = TRUE, 
+#     main="Learning Performance Analysis", 
+#     axis.labels = c("Retention","Transfer"))
+
+
+
 
 ##r=1
-result1<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov1,STv),data=SRSTd, model.name="Random effects model")
-summary(result1)
-plot(result1, axis.labels = c("Retention","Transfer"),study.ellipse.plot = FALSE)
+result.SRST1.main<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov1,STv),data=SRSTd, model.name="Random effects model")
+summary(result.SRST1.main)
+plot(result.SRST1.main, axis.labels = c("Retention","Transfer"),study.ellipse.plot = FALSE)
 
 ##extract the variance component of the random effects
-T21<-vec2symMat(coef(result1,select="random"))
-T21
+result.SRST1.T2<-vec2symMat(coef(result.SRST1.main,select="random"))
 ##Convert the covariance matrix to a correlation matrix
-cov2cor(T21)
+result.SRST1.cor<-cov2cor(result.SRST1.T2)
+result.SRST1.cor
 
 ##three moderators
 resultpp<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model",x=cbind(PP))
@@ -107,7 +101,7 @@ cov2cor(T2all)
 plot(resultall)
 
 #CL
-resultCL<-meta(y=cbind(CLd),v=cbind(CLv),data=SRSTd, model.name="Random effects model")
-summary(resultCL)
-plot(resultCL,study.ellipse.plot = FALSE)
+result.CL.main<-meta(y=cbind(CLd),v=cbind(CLv),data=SRSTd, model.name="Random effects model")
+summary(result.CL.main)
+#plot(resultCL,study.ellipse.plot = FALSE)
 
