@@ -6,7 +6,7 @@ library(MVN)
 library(nortest)
 
 ##Read data from csv
-SRSTd <- read_csv("yeh_ad.csv")
+SRSTd <- read_csv("yeh_ad_final_05162017.csv")
 SRSTd.TotalN<-SRSTd$CGn+SRSTd$EGn
 mean(SRSTd.TotalN)
 sd(SRSTd.TotalN)
@@ -39,38 +39,43 @@ SRSTd.compPP
 resSR_PP<-rma(estimate,sei=stderror,mods= ~ PP, method="FE", data=SRSTd.compPP,digits=3)
 resSR_PP
 #Approach 2: meta regression
-resSR_PP_reg<-rma(measure="SMD",SRd,SRv,mods=~PP,data=SRSTd,digits = 3)
-resSR_PP_reg
-plot(resSR_PP_reg)
+resSR.PP<-rma(measure="SMD",SRd,SRv,mods=~PP,data=SRSTd,digits = 3)
+resSR.PP
+plot(resSR.PP)
 
 #Length of VS
 #Appraoch 1: Q statistics
 #Seperate analysis for Length of Verbal Segment (LVS)
 #Approach 2: meta regression
-resSR_LVS_reg<-rma(measure="SMD",SRd,SRv,mods=~LVS,data=SRSTd, digits=3)
-resSR_LVS_reg
-plot(resSR_LVS_reg)
+resSR.LVS<-rma(measure="SMD",SRd,SRv,mods=~LVS,data=SRSTd, digits=3)
+resSR.LVS
+plot(resSR.LVS)
 
 #Type of visualization
 #Approach 1: Q statistics
 #Approach 2: meta regression
-resSR_ToV_reg<-rma(measure="SMD",SRd,SRv,mods=~ToV,data=SRSTd, digits=3)
-resSR_ToV_reg
-plot(resSR_ToV_reg)
+resSR.ToV<-rma(measure="SMD",SRd,SRv,mods=~ToV,data=SRSTd, digits=3)
+resSR.ToV
+plot(resSR.ToV)
 
 #two moderators
-resSR_PP_LVS_reg<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,LVS),data=SRSTd, digits=3)
-resSR_PP_LVS_reg
+resSR.PPxLVS<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,LVS,PoPxLoVS),data=SRSTd, digits=3)
+resSR.PPxLVS
+v<-vcov.rma(resSR.PPxLVS)
+cov2cor(v)
 
-resSR_PP_ToV_reg<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,ToV),data=SRSTd, digits=3)
-resSR_PP_ToV_reg
+resSR.PPxToV<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,ToV,PoPxToV),data=SRSTd, digits=3)
+resSR.PPxToV
 
-resSR_ToV_LVS_reg<-rma(measure="SMD",SRd,SRv,mods=cbind(LVS,ToV),data=SRSTd, digits=3)
-resSR_ToV_LVS_reg
+resSR.ToVxLVS<-rma(measure="SMD",SRd,SRv,mods=cbind(LVS,ToV, LoVSxToV),data=SRSTd, digits=3)
+resSR.ToVxLVS
 
 #All moderators
-resSR_All_reg<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,LVS,ToV),data=SRSTd, digits=3)
-resSR_All_reg
+resSR.PPxLVSxToV<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,LVS,ToV,PoPxLoVS,PoPxToV,LoVSxToV,PoPxLoVSxToV),data=SRSTd, digits=3)
+resSR.PPxLVSxToV
+
+
+
 
 
 
@@ -117,3 +122,51 @@ resST_ToV_LVS_reg
 #All moderators
 resST_All_reg<-rma(measure="SMD",STd,STv,mods=cbind(PP,LVS,ToV),data=SRSTd, digits=3)
 resST_All_reg
+
+#CL
+#overall analysis
+resCL<-rma(measure="SMD",CLd,CLv,data=SRSTd)
+resCL
+
+#Subgroup analysis
+# Presentation Pace
+#Approach 1: Q statistics
+#Seperate analysis for Presentation Pace (PP)
+#Create data frame for the two subgroup estimates
+#Approach 2: meta regression
+resCL_PP_reg<-rma(measure="SMD",CLd,CLv,mods=~PP,data=SRSTd,digits = 3)
+resCL_PP_reg
+plot(resCL_PP_reg)
+
+#Length of VS
+#Appraoch 1: Q statistics
+#Seperate analysis for Length of Verbal Segment (LVS)
+#Approach 2: meta regression
+resCL_LVS_reg<-rma(measure="SMD",CLd,CLv,mods=~LVS,data=SRSTd, digits=3)
+resCL_LVS_reg
+plot(resCL_LVS_reg)
+
+#Type of visualization
+#Approach 1: Q statistics
+#Approach 2: meta regression
+resCL_ToV_reg<-rma(measure="SMD",CLd,CLv,mods=~ToV,data=SRSTd, digits=3)
+resCL_ToV_reg
+plot(resCL_ToV_reg)
+
+#two moderators
+resCL_PP_LVS_reg<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,LVS),data=SRSTd, digits=3)
+resCL_PP_LVS_reg
+
+resCL_PP_ToV_reg<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,ToV),data=SRSTd, digits=3)
+resCL_PP_ToV_reg
+
+resCL_ToV_LVS_reg<-rma(measure="SMD",CLd,CLv,mods=cbind(LVS,ToV),data=SRSTd, digits=3)
+resCL_ToV_LVS_reg
+
+#All moderators
+resCL_All_reg<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,LVS,ToV),data=SRSTd, digits=3)
+resCL_All_reg
+
+#Interaction PP and LoVS
+resCL_PP_LVS_i_reg<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,LVS,PoPxLoVS),data=SRSTd, digits=3)
+resCL_PP_LVS_i_reg
