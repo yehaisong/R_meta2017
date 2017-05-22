@@ -6,13 +6,13 @@ library(MVN)
 library(nortest)
 
 ##Read data from csv
-SRSTd <- read_csv("yeh_ad_final_05162017.csv")
+SRSTd <- read_csv("yeh_ad_final_05222017_r_56.csv")
 
 ##QQPlot test using metaFor
 #Normality test for short term retention
 srd<-SRSTd[["SRd"]]
 lillie.test(srd)#Kolmogorov-Smirnov normality test
-sf.test(srd)#Shapiro-Francia normality test
+csf.test(srd)#Shapiro-Francia normality test
 #Generate QQ plot for retention
 resSR<-rma(measure="SMD",SRd,SRv,data=SRSTd)
 resSR
@@ -64,7 +64,7 @@ result.SRST0.cor<-cov2cor(result.SRST0.T2)
 result.SRST0.cor
 
 ##plot the effect sizes and their confidence ellipses
-plot(result.SRST0.main, axis.labels = c("Retention","Transfer"),study.ellipse.plot = FALSE)
+plot(result.SRST0.main, axis.labels = c("LPKR","LPKT"),study.ellipse.plot = FALSE)
 
 ##Plot the effect sizes with the forest plots
 ##create extra panels for the forest plots
@@ -78,13 +78,28 @@ plot(result.SRST0.main, axis.labels = c("Retention","Transfer"),study.ellipse.pl
 ##r=1
 result.SRST1.main<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov1,STv),data=SRSTd, model.name="Random effects model")
 summary(result.SRST1.main)
-plot(result.SRST1.main, axis.labels = c("Retention","Transfer"),study.ellipse.plot = FALSE)
+plot(result.SRST1.main, axis.labels = c("LPKR","LPKT"),study.ellipse.plot = FALSE)
+
 
 ##extract the variance component of the random effects
 result.SRST1.T2<-vec2symMat(coef(result.SRST1.main,select="random"))
 ##Convert the covariance matrix to a correlation matrix
 result.SRST1.cor<-cov2cor(result.SRST1.T2)
 result.SRST1.cor
+
+
+
+result.SRSTC.main<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcovC,STv),data=SRSTd, model.name="Random effects model")
+summary(result.SRSTC.main)
+plot(result.SRSTC.main, axis.labels = c("LPKR","LPKT"),study.ellipse.plot = FALSE)
+
+##extract the variance component of the random effects
+result.SRSTC.T2<-vec2symMat(coef(result.SRST1.main,select="random"))
+##Convert the covariance matrix to a correlation matrix
+result.SRSTC.cor<-cov2cor(result.SRSTC.T2)
+result.SRSTC.cor
+
+
 
 ##three moderators
 resultpp<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcov,STv),data=SRSTd, model.name="Random effects model",x=cbind(PP))
