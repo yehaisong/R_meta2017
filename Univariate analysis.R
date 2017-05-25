@@ -102,6 +102,9 @@ resSR.PPxLVSxToV<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,LVS,ToV,PoPxLoVS,PoPxT
 resSR.PPxLVSxToV
 cov2cor(vcov.rma(resSR.PPxLVSxToV))
 
+  resSR.PP_LVS_ToV<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,LVS,ToV),data=SRSTd, digits=3)
+resSR.PP_LVS_ToV
+cov2cor(vcov.rma(resSR.PP_LVS_ToV))
 
 ###Transfer
 #overall analysis
@@ -175,6 +178,9 @@ resST.PPxLVSxToV<-rma(measure="SMD",STd,STv,mods=cbind(PP,LVS,ToV,PoPxLoVS,PoPxT
 resST.PPxLVSxToV
 cov2cor(vcov.rma(resST.PPxLVSxToV))
 
+resST.PP_LVS_ToV<-rma(measure="SMD",STd,STv,mods=cbind(PP,LVS,ToV),data=SRSTd, digits=3)
+resST.PP_LVS_ToV
+cov2cor(vcov.rma(resST.PP_LVS_ToV))
 
 #CL
 #overall analysis
