@@ -101,8 +101,7 @@ cov2cor(vcov.rma(resSR.ToVxLVS))
 resSR.PPxLVSxToV<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,LVS,ToV,PoPxLoVS,PoPxToV,LoVSxToV,PoPxLoVSxToV),data=SRSTd, digits=3)
 resSR.PPxLVSxToV
 cov2cor(vcov.rma(resSR.PPxLVSxToV))
-
-  resSR.PP_LVS_ToV<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,LVS,ToV),data=SRSTd, digits=3)
+resSR.PP_LVS_ToV<-rma(measure="SMD",SRd,SRv,mods=cbind(PP,LVS,ToV),data=SRSTd, digits=3)
 resSR.PP_LVS_ToV
 cov2cor(vcov.rma(resSR.PP_LVS_ToV))
 
@@ -210,3 +209,23 @@ rmaCL.taf<-trimfill(rmaCL)
 funnel(rmaCL.taf)
 rmaCL.taf
 
+#two moderators
+resCL.PPxLVS<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,LVS,PoPxLoVS),data=SRSTd, digits=3)
+resCL.PPxLVS
+cov2cor(vcov.rma(resCL.PPxLVS))
+
+resCL.PPxToV<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,ToV,PoPxToV),data=SRSTd, digits=3)
+resCL.PPxToV
+cov2cor(vcov.rma(resCL.PPxToV))
+
+resCL.ToVxLVS<-rma(measure="SMD",CLd,CLv,mods=cbind(LVS,ToV, LoVSxToV),data=SRSTd, digits=3)
+resCL.ToVxLVS
+cov2cor(vcov.rma(resCL.ToVxLVS))
+
+#All moderators
+resCL.PPxLVSxToV<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,LVS,ToV,PoPxLoVS,PoPxToV,LoVSxToV,PoPxLoVSxToV),data=SRSTd, digits=3)
+resCL.PPxLVSxToV
+cov2cor(vcov.rma(resCL.PPxLVSxToV))
+resCL.PP_LVS_ToV<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,LVS,ToV),data=SRSTd, digits=3)
+resCL.PP_LVS_ToV
+cov2cor(vcov.rma(resCL.PP_LVS_ToV))
