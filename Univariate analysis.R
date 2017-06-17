@@ -15,6 +15,12 @@ cat("N MAX: ", max(SRSTd.TotalN))
 cat("N MIN: ", min(SRSTd.TotalN))
 cat("N Total: ", sum(SRSTd.TotalN))
 
+cat("SRd mean: ", mean(SRSTd$SRd, na.rm=TRUE))
+cat("SRd SD: ", sd(SRSTd$SRd, na.rm=TRUE))
+cat("STd mean: ", mean(SRSTd$STd, na.rm=TRUE))
+cat("STd SD: ", sd(SRSTd$STd, na.rm=TRUE))
+cat("CLd mean: ", mean(SRSTd$CLd, na.rm=TRUE))
+cat("CLd SD: ", sd(SRSTd$CLd, na.rm=TRUE))
 
 
 ###Retention
