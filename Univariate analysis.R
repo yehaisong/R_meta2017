@@ -22,6 +22,19 @@ cat("STd SD: ", sd(SRSTd$STd, na.rm=TRUE))
 cat("CLd mean: ", mean(SRSTd$CLd, na.rm=TRUE))
 cat("CLd SD: ", sd(SRSTd$CLd, na.rm=TRUE))
 
+#Correlation among variables
+cor.test(SRSTd$SRd,SRSTd$PP)
+cor.test(SRSTd$SRd,SRSTd$LVS)
+cor.test(SRSTd$SRd,SRSTd$ToV)
+cor.test(SRSTd$SRd,SRSTd$SRd)
+cor.test(SRSTd$PP,SRSTd$LVS)
+cor.test(SRSTd$PP,SRSTd$ToV)
+cor.test(SRSTd$LVS,SRSTd$ToV)
+cor.test(SRSTd$PP,SRSTd$PP)
+cor.test(SRSTd$ToV,SRSTd$ToV)
+
+##STd
+
 
 ###Retention
 #overall analysis
