@@ -64,6 +64,7 @@ cor.test(Subset_CLd$ToV,Subset_CLd$ToV)
 resSR<-rma(measure="SMD",SRd,SRv,data=SRSTd)
 resSR
 ##forest plot for retention
+SRSTd<-SRSTd[order(SRSTd$ExperimentID),]
 rmaSR<-rma(yi=SRd,vi=SRv,data=SRSTd)
 forest(rmaSR,slab=SRSTd$ExperimentID)
 title("Forest plot for LPKR")
