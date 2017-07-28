@@ -66,7 +66,7 @@ resSR
 ##forest plot for retention
 SRSTd<-SRSTd[order(SRSTd$ExperimentID),]
 rmaSR<-rma(yi=SRd,vi=SRv,data=SRSTd)
-forest(rmaSR,slab=SRSTd$ExperimentID)
+forest(rmaSR,slab=SRSTd$ExperimentID,cex=0.75)
 title("Forest plot for LPKR")
 forest(SRSTd$SRd, SRSTd$SRv,
        xlim=c(-2.5,3.5),
@@ -155,7 +155,7 @@ resST
 
 ##forest plot for transfer
 rmaST<-rma(yi=STd,vi=STv,data=SRSTd)
-forest(rmaST,slab=SRSTd$ExperimentID)
+forest(rmaST,slab=SRSTd$ExperimentID,cex=0.75)
 title("Forest plot for LPKT")
 forest(SRSTd$STd, SRSTd$STv,
        xlim=c(-2.5,3.5),
@@ -231,7 +231,7 @@ resCL
 
 ##forest plot for CL
 rmaCL<-rma(yi=CLd,vi=CLv,data=SRSTd)
-forest(rmaCL,slab=SRSTd$ExperimentID)
+forest(rmaCL,slab=SRSTd$ExperimentID,cex=0.75)
 title("Forest plot for LCL")
 forest(SRSTd$CLd, SRSTd$CLv,
        xlim=c(-2.5,3.5),
