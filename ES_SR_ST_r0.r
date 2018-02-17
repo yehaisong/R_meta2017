@@ -88,13 +88,13 @@ result.SRST1.cor<-cov2cor(result.SRST1.T2)
 result.SRST1.cor
 
 
-
+##R=0.56
 result.SRSTC.main<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcovC,STv),data=SRSTd, model.name="Random effects model")
 summary(result.SRSTC.main)
 plot(result.SRSTC.main, axis.labels = c("LPKR","LPKT"),study.ellipse.plot = FALSE)
 
 ##extract the variance component of the random effects
-result.SRSTC.T2<-vec2symMat(coef(result.SRST1.main,select="random"))
+result.SRSTC.T2<-vec2symMat(coef(result.SRSTC.main,select="random"))
 ##Convert the covariance matrix to a correlation matrix
 result.SRSTC.cor<-cov2cor(result.SRSTC.T2)
 result.SRSTC.cor

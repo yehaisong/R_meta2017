@@ -6,7 +6,7 @@ library(MVN)
 library(nortest)
 
 ##Read data from csv
-SRSTd <- read_csv("yeh_ad_final_05162017.csv")
+SRSTd <- read_csv("yeh_ad_final_05222017_r_56.csv")
 
 SRSTd.TotalN<-SRSTd$CGn+SRSTd$EGn
 cat("N mean: ", mean(SRSTd.TotalN))
@@ -17,6 +17,7 @@ cat("N Total: ", sum(SRSTd.TotalN))
 
 cat("SRd mean: ", mean(SRSTd$SRd, na.rm=TRUE))
 cat("SRd SD: ", sd(SRSTd$SRd, na.rm=TRUE))
+cat("SRd n: ", nrow(SRSTd$SRd))
 cat("STd mean: ", mean(SRSTd$STd, na.rm=TRUE))
 cat("STd SD: ", sd(SRSTd$STd, na.rm=TRUE))
 cat("CLd mean: ", mean(SRSTd$CLd, na.rm=TRUE))
