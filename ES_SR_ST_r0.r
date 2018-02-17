@@ -12,7 +12,7 @@ SRSTd <- read_csv("yeh_ad_final_05222017_r_56.csv")
 #Normality test for short term retention
 srd<-SRSTd[["SRd"]]
 lillie.test(srd)#Kolmogorov-Smirnov normality test
-csf.test(srd)#Shapiro-Francia normality test
+sf.test(srd)#Shapiro-Francia normality test
 #Generate QQ plot for retention
 resSR<-rma(measure="SMD",SRd,SRv,data=SRSTd)
 resSR
@@ -88,7 +88,7 @@ result.SRST1.cor<-cov2cor(result.SRST1.T2)
 result.SRST1.cor
 
 
-##r=custom
+
 result.SRSTC.main<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcovC,STv),data=SRSTd, model.name="Random effects model")
 summary(result.SRSTC.main)
 plot(result.SRSTC.main, axis.labels = c("LPKR","LPKT"),study.ellipse.plot = FALSE)
@@ -98,8 +98,6 @@ result.SRSTC.T2<-vec2symMat(coef(result.SRST1.main,select="random"))
 ##Convert the covariance matrix to a correlation matrix
 result.SRSTC.cor<-cov2cor(result.SRSTC.T2)
 result.SRSTC.cor
-
-
 
 
 
@@ -121,18 +119,4 @@ plot(resultall)
 result.CL.main<-meta(y=cbind(CLd),v=cbind(CLv),data=SRSTd, model.name="Random effects model")
 summary(result.CL.main)
 #plot(resultCL,study.ellipse.plot = FALSE)
-
-
-##long term learning performance
-##r=custom
-
-LRLTd <- read_csv("yeh_ad_longterm.csv")
-
-
-restLR<-rma(measure="SMD",LRd,LRv,data=LRLTd)
-restLR
-
-
-restLT<-rma(measure="SMD",LTd,LTv,data=LRLTd)
-restLT
 
