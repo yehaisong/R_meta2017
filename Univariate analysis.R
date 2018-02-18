@@ -80,7 +80,7 @@ forest(SRSTd$SRd, SRSTd$SRv,
        cex.lab=1,cex.axis = 1,
        lty=c("solid","blank"))
 title("Caterpillar plot for LPKR")
-points(sort(SRSTd$SRd), 68:1, pch=19, cex=0.5)
+points(sort(SRSTd$SRd), 67:1, pch=19, cex=0.5)
 addpoly(rmaSR, row=0, mlab = "", annotate = FALSE, cex=1)
 text(-2,0,"RE Model", pos=4, offset=0, cex=1)
 #funnel and trimfill adjustment
@@ -169,7 +169,7 @@ forest(SRSTd$STd, SRSTd$STv,
        cex.lab=1,cex.axis = 1,
        lty=c("solid","blank"))
 title("Caterpillar plot for LPKT")
-points(sort(SRSTd$STd), 58:1, pch=19, cex=0.5)
+points(sort(SRSTd$STd), 57:1, pch=19, cex=0.5)
 addpoly(rmaST, row=0, mlab = "", annotate = FALSE, cex=1)
 text(-2,0,"RE Model", pos=4, offset=0, cex=1)
 #funnel and trimfill adjustment
@@ -267,9 +267,9 @@ resCL.ToVxLVS
 cov2cor(vcov.rma(resCL.ToVxLVS))
 
 #All moderators
-resCL.PPxLVSxToV<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,LVS,ToV,PoPxLoVS,PoPxToV,LoVSxToV,PoPxLoVSxToV),data=SRSTd, digits=3)
-resCL.PPxLVSxToV
-cov2cor(vcov.rma(resCL.PPxLVSxToV))
-resCL.PP_LVS_ToV<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,LVS,ToV),data=SRSTd, digits=3)
-resCL.PP_LVS_ToV
-cov2cor(vcov.rma(resCL.PP_LVS_ToV))
+# resCL.PPxLVSxToV<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,LVS,ToV,PoPxLoVS,PoPxToV,LoVSxToV,PoPxLoVSxToV),data=SRSTd, digits=3)
+# resCL.PPxLVSxToV
+# cov2cor(vcov.rma(resCL.PPxLVSxToV))
+# resCL.PP_LVS_ToV<-rma(measure="SMD",CLd,CLv,mods=cbind(PP,LVS,ToV),data=SRSTd, digits=3)
+# resCL.PP_LVS_ToV
+# cov2cor(vcov.rma(resCL.PP_LVS_ToV))

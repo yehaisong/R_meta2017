@@ -91,7 +91,7 @@ result.SRST1.cor
 ##R=0.56
 result.SRSTC.main<-meta(y=cbind(SRd,STd),v=cbind(SRv,SRSTcovC,STv),data=SRSTd, model.name="Random effects model")
 summary(result.SRSTC.main)
-plot(result.SRSTC.main, axis.labels = c("LPKR","LPKT"),study.ellipse.plot = FALSE)
+plot(result.SRSTC.main, axis.labels = c("Knowledge Transfer","Knowledge Retention"),study.ellipse.plot = FALSE)
 
 ##extract the variance component of the random effects
 result.SRSTC.T2<-vec2symMat(coef(result.SRSTC.main,select="random"))
